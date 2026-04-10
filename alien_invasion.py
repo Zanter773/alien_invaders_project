@@ -50,7 +50,9 @@ class AlienInvasion:
 
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_SPACE:
+            self._fire_bullet()
+        elif event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
@@ -60,8 +62,7 @@ class AlienInvasion:
             self.ship.moving_down = True
         if event.key == pygame.K_q:
             sys.exit()
-        if event.key == pygame.K_SPACE:
-            self._fire_bullet()
+        
     
     
     def _check_keyup_events(self, event):
@@ -105,7 +106,3 @@ if __name__ == '__main__':
     # Makes a game instance, and then runs the game 
     ai = AlienInvasion()
     ai.run_game()
-    
-
-
-    
