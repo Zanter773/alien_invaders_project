@@ -1,8 +1,15 @@
+"""
+Nathan Brooks
+4/10/2026
+The main file of the alien invasion project. It is where the game actually runs.
+"""
+
 import sys
 import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+
 
 class AlienInvasion:
     """Overall class-to manage game assests and behaviors."""

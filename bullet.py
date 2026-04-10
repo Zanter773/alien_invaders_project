@@ -1,3 +1,9 @@
+"""
+Nathan Brooks
+4/10/2026
+Where the bullet is created, how it moves around on the screen, and then put into the game.
+"""
+
 import pygame
 from pygame.sprite import Sprite
 

@@ -1,3 +1,9 @@
+"""
+Nathan Brooks
+4/10/2026
+Where the ship is created, the sprite is loaded onto the ship, and how movement is controlled for said ship.
+"""
+
 import pygame
 
 class Ship:
