@@ -140,6 +140,7 @@ class AlienInvasion:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+
     
     def _update_aliens(self):
         """Check if the fleet is at an edge, then update positions."""
@@ -161,15 +162,16 @@ class AlienInvasion:
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
 
-        current_x, current_y = self.settings.screen_width - 2 * alien_width, alien_height
-        while current_y < (self.settings.screen_height) and current_y > 0:
-            #while current_x < (self.settings.screen_width) and current_x > 0:
+        current_x, current_y = self.settings.screen_width / 2, alien_height
+        while current_x < (self.settings.screen_width):
+            while current_y < (self.settings.screen_height):
                 self._create_alien(current_x, current_y)
                 current_y += 2 * alien_height
+            
 
             # Finished a row; reset y value, and increment x value.
-            #current_y = alien_height
-            #current_x += 2 * alien_width
+            current_x += 2 * alien_width
+            current_y = alien_height
         
     def _create_alien(self, x_position, y_position):
         """Create an alien and place it in the row."""
