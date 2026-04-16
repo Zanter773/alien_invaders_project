@@ -1,3 +1,9 @@
+"""
+Nathan Brooks
+4/10/2026
+The main file of the alien invasion project. It is where the game actually runs.
+"""
+
 import sys
 from time import sleep
 
@@ -8,6 +14,7 @@ from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from aliens import Alien
+
 
 
 class AlienInvasion:
@@ -68,14 +75,19 @@ class AlienInvasion:
 
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_SPACE:
+            self._fire_bullet()
+        elif event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
-        elif event.key == pygame.K_q:
+        elif event.key == pygame.K_UP:
+            self.ship.moving_up = True
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_down = True
+        if event.key == pygame.K_q:
             sys.exit()
-        elif event.key == pygame.K_SPACE:
-            self._fire_bullet()
+        
     
     
     def _check_keyup_events(self, event):
@@ -84,6 +96,10 @@ class AlienInvasion:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+        elif event.key == pygame.K_UP:
+            self.ship.moving_up = False
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_down = False
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
@@ -109,7 +125,7 @@ class AlienInvasion:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
+            if bullet.rect.left >= self.settings.screen_width:
                 self.bullets.remove(bullet)
         
         self._check_bullet_alien_collisions()
@@ -207,7 +223,3 @@ if __name__ == '__main__':
     # Makes a game instance, and then runs the game 
     ai = AlienInvasion()
     ai.run_game()
-    
-
-
-    
