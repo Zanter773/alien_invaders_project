@@ -140,6 +140,8 @@ class AlienInvasion:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.ship.center_ship()
+            sleep(0.5)
             self.settings.alien_speed += .5
             self.settings.ship_speed += .5
             self.settings.ship_limit += 1
