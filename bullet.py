@@ -1,6 +1,6 @@
 """
 Nathan Brooks
-4/10/2026
+4/17/2026
 Where the bullet is created, how it moves around on the screen, and then put into the game.
 """
 

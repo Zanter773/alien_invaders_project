@@ -1,6 +1,6 @@
 """
 Nathan Brooks
-4/10/2026
+4/17/2026
 The main file of the alien invasion project. It is where the game actually runs.
 """
 

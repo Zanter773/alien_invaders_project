@@ -1,3 +1,9 @@
+"""
+Nathan Brooks
+4/17/2026
+Where the aliens are defined and created into the game
+"""
+
 import pygame
 from pygame.sprite import Sprite
 

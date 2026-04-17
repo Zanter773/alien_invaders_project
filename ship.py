@@ -1,6 +1,6 @@
 """
 Nathan Brooks
-4/10/2026
+4/17/2026
 Where the ship is created, the sprite is loaded onto the ship, and how movement is controlled for said ship.
 """
 
@@ -52,7 +52,7 @@ class Ship:
 
     def center_ship(self):
         """Center the ship on the screen."""
-        self.rect.left = self.screen_rect.left
+        self.rect.midleft = self.screen_rect.midleft
         self.x = float(self.rect.x)
         
 
