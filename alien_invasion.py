@@ -1,3 +1,9 @@
+"""
+Nathan Brooks
+4/17/2026
+The main file of the alien invasion project. It is where the game actually runs.
+"""
+
 import sys
 from time import sleep
 
@@ -104,14 +110,19 @@ class AlienInvasion:
 
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_SPACE:
+            self._fire_bullet()
+        elif event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
-        elif event.key == pygame.K_q:
+        elif event.key == pygame.K_UP:
+            self.ship.moving_up = True
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_down = True
+        if event.key == pygame.K_q:
             sys.exit()
-        elif event.key == pygame.K_SPACE:
-            self._fire_bullet()
+        
     
     
     def _check_keyup_events(self, event):
@@ -120,6 +131,10 @@ class AlienInvasion:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+        elif event.key == pygame.K_UP:
+            self.ship.moving_up = False
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_down = False
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group."""
@@ -153,7 +168,7 @@ class AlienInvasion:
 
         # Get rid of bullets that have disappeared.
         for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
+            if bullet.rect.left >= self.settings.screen_width:
                 self.bullets.remove(bullet)
         
         self._check_bullet_alien_collisions()
@@ -185,8 +200,8 @@ class AlienInvasion:
         self._check_fleet_edges()
         self.aliens.update()
 
-        # Look for aliens hitting the bottom of the screen.
-        self._check_aliens_bottom()
+        # Look for aliens hitting the left of the screen.
+        self._check_aliens_left()
 
         # Look for alien-ship collisions.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
@@ -200,20 +215,21 @@ class AlienInvasion:
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
 
-        current_x, current_y = alien_width, alien_height
-        while current_y < (self.settings.screen_height - 3 * alien_height):
-            while current_x < (self.settings.screen_width - 2 * alien_width):
+        current_x, current_y = self.settings.screen_width / 2, alien_height
+        while current_x < (self.settings.screen_width):
+            while current_y < (self.settings.screen_height):
                 self._create_alien(current_x, current_y)
-                current_x += 2 * alien_width
+                current_y += 2 * alien_height
+            
 
-            # Finished a row; reset x value, and increment y value.
-            current_x = alien_width
-            current_y += 2 * alien_height
+            # Finished a row; reset y value, and increment x value.
+            current_x += 2 * alien_width
+            current_y = alien_height
         
     def _create_alien(self, x_position, y_position):
         """Create an alien and place it in the row."""
         new_alien = Alien(self)
-        new_alien.x = x_position
+        new_alien.y = y_position
         new_alien.rect.x = x_position
         new_alien.rect.y = y_position
         self.aliens.add(new_alien)
@@ -228,7 +244,7 @@ class AlienInvasion:
     def _change_fleet_direction(self):
         """Drop the entire fleet and change the fleet's direction."""
         for alien in self.aliens.sprites():
-            alien.rect.y += self.settings.fleet_drop_speed
+            alien.rect.x -= self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
 
     def _ship_hit(self):
@@ -252,10 +268,10 @@ class AlienInvasion:
             self.game_active = False
             pygame.mouse.set_visible(True)
     
-    def _check_aliens_bottom(self):
-        """Check if any aliens have reached the bottom of the screen."""
+    def _check_aliens_left(self):
+        """Check if any aliens have reached the left of the screen."""
         for alien in self.aliens.sprites():
-            if alien.rect.bottom >= self.settings.screen_height:
+            if alien.rect.left <= 0:
                 # Treat this the same as if the ship got hit.
                 self._ship_hit()
                 break
@@ -264,7 +280,3 @@ if __name__ == '__main__':
     # Makes a game instance, and then runs the game 
     ai = AlienInvasion()
     ai.run_game()
-    
-
-
-    
