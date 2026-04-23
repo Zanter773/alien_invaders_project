@@ -1,9 +1,3 @@
-"""
-Nathan Brooks
-4/17/2026
-Where all the settings for each part of the game is.
-"""
-
 class Settings:
     """A class to store all settings for Alien Invasion."""
 

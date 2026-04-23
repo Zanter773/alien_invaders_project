@@ -1,9 +1,3 @@
-"""
-Nathan Brooks
-4/17/2026
-Where the bullet is created, how it moves around on the screen, and then put into the game.
-"""
-
 import pygame
 from pygame.sprite import Sprite
 
@@ -20,17 +14,17 @@ class Bullet(Sprite):
         # Create a bullet rect at (0, 0) and then set correct position.
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width,
           self.settings.bullet_height)
-        self.rect.midright = ai_game.ship.rect.midright
+        self.rect.midtop = ai_game.ship.rect.midtop
 
         # Store the bullet's position as a float.
-        self.x = float(self.rect.x)
+        self.y = float(self.rect.y)
 
     def update(self):
-        """Move the bullet to the right on the screen."""
+        """Move the bullet up the screen."""
         # Update the exact position of the bullet.
-        self.x += self.settings.bullet_speed
+        self.y -= self.settings.bullet_speed
         # Update the rect position.
-        self.rect.x = self.x
+        self.rect.y = self.y
     
     def draw_bullet(self):
         """Draw the bullet to the screen."""
