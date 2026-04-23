@@ -116,7 +116,9 @@ class AlienInvasion:
             pygame.mouse.set_visible(False)
 
     def _check_unpause_button(self, mouse_pos):
+        """Allows the player to continue where they left off when pressing the unpause button."""
         button_clicked = self.pause_button.rect.collidepoint(mouse_pos)
+        # Restarts the game 
         if button_clicked and not self.game_active:
             self.game_active = True
             self.game_pause = False
