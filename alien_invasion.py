@@ -47,9 +47,13 @@ class AlienInvasion:
 
         # Start Alien Invasion in an inactive state.
         self.game_active = False
+        self.game_pause = False
 
         # Make the Play button.
         self.play_button = Button(self, "Play")
+
+        # Make the Unpause button.
+        self.pause_button = Button(self, "Unpause?")
 
 
     def run_game(self):
@@ -80,7 +84,10 @@ class AlienInvasion:
                 self._check_keyup_events(event)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                self._check_play_button(mouse_pos)
+                if self.game_pause == False:
+                    self._check_play_button(mouse_pos)
+                else:
+                    self._check_unpause_button(mouse_pos)
 
     def _check_play_button(self, mouse_pos):
         """Start a new game when the player clicks Play."""
@@ -108,10 +115,21 @@ class AlienInvasion:
             # Hide the mouse cursor.
             pygame.mouse.set_visible(False)
 
+    def _check_unpause_button(self, mouse_pos):
+        button_clicked = self.pause_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.game_active:
+            self.game_active = True
+            self.game_pause = False
+
+            # Hide the mouse cursor.
+            pygame.mouse.set_visible(False)
+
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
         if event.key == pygame.K_SPACE:
             self._fire_bullet()
+        elif event.key == pygame.K_ESCAPE:
+            self._pause_game()
         elif event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
@@ -123,7 +141,12 @@ class AlienInvasion:
         if event.key == pygame.K_q:
             sys.exit()
         
-    
+    def _pause_game(self):
+        """Pauses the game and makes the mouse visible."""
+        self.game_pause = True
+        self.game_active = False
+        pygame.mouse.set_visible(True)
+        
     
     def _check_keyup_events(self, event):
         """Responds to key releases."""
@@ -153,9 +176,11 @@ class AlienInvasion:
         # Draw the score information.
         self.sb.show_score()
 
-        # Draw the play button if the game is inactive.
-        if not self.game_active:
+        # Draw the play button if the game is inactive. If the game is paused, draw the pause button
+        if not self.game_active and not self.game_pause:
             self.play_button.draw_button()
+        elif not self.game_active and self.game_pause:
+            self.pause_button.draw_button()
         
         # Makes the most recently drawn screen visible
         pygame.display.flip()
