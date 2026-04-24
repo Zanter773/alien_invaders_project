@@ -1,3 +1,9 @@
+"""
+Nathan Brooks
+4/24/2026
+Where all the game statistics are held in the game.
+"""
+
 class GameStats:
     """Track statistics for Alien Invasion."""
 
