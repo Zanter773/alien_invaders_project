@@ -1,3 +1,9 @@
+"""
+Nathan Brooks
+4/24/2026
+Where the HUD information is created and intialized.
+"""
+
 import pygame.font
 from pygame.sprite import Group
 

@@ -1,6 +1,6 @@
 """
 Nathan Brooks
-4/17/2026
+4/24/2026
 The main file of the alien invasion project. It is where the game actually runs.
 """
 
@@ -201,6 +201,7 @@ class AlienInvasion:
         self._check_bullet_alien_collisions()
 
     def _check_bullet_alien_collisions(self):
+        """Checks to see if a bullet hit an alien and also creates new fleets if no aliens remain."""
         # Check for any bullets that have hit aliens.
         #   If so, get rid of the bullet and the alien.
         collisions = pygame.sprite.groupcollide(

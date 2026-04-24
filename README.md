@@ -8,3 +8,7 @@ Bullets also fire from the tip of the ship and go to the right instead of straig
 ------------------------------------------------------------------------------------------------
 
 For the second milestone, I have made it so the aliens are also rotated and move horizontally. If the aliens hit the player or hit the left edge of the screen, the player loses a life. If the player clears out all of the aliens, the game becomes slightly harder as both the player and aliens become faster. The player would also gain an extra life.
+
+-------------------------------------------------------------------------------------------------
+
+For the third milestone, I just made sure that the code from the participation worked correctly in the new format. I also added a fully functional pause button that allowed the player to pause whenever they want and resume at any time.

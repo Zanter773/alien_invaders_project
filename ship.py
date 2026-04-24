@@ -1,6 +1,6 @@
 """
 Nathan Brooks
-4/17/2026
+4/24/2026
 Where the ship is created, the sprite is loaded onto the ship, and how movement is controlled for said ship.
 """
 
